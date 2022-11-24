@@ -6,8 +6,6 @@ import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.12
 import QtQuick.Layouts 1.12
 
-
-
 /*
 Author:  Joanthan Baird
 Date:    23NOV2022
@@ -103,11 +101,5 @@ Window {
             y: 569
             text: qsTr("Button")
         }
-
-
-
     }
-
-
-
 }
