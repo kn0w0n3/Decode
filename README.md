@@ -1,4 +1,5 @@
 # Decode
 Genetics Analysis 
 
-![Decode-Initial-Concept-11-22-22](https://user-images.githubusercontent.com/22214754/203502839-a5f4c442-2150-4c51-8312-b1ccf544c1b7.gif)  
+![decode-gui-11-25-22](https://user-images.githubusercontent.com/22214754/204078367-74ede8b8-1ac1-438d-8ffd-c6d4673698b5.gif)  
+ 
