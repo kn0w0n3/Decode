@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>images/decode-bg-1.png</file>
+        <file>images/Text-Logo.png</file>
     </qresource>
 </RCC>

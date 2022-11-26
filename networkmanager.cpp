@@ -12,7 +12,7 @@ NetworkManager::NetworkManager(){
     manager = new QNetworkAccessManager(this);
 
     incomingDataSize = 0;
-    downloadGenBankData();
+    //downloadGenBankData();
 }
 
 void NetworkManager::replyFinished(){

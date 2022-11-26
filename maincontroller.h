@@ -11,6 +11,7 @@ Contact: tr14rc3@gmail.com
 #include <QObject>
 #include <QThread>
 #include <QWidget>
+//#include <QApplication>
 
 //File Ops Libs
 #include <QFile>
@@ -23,7 +24,7 @@ Contact: tr14rc3@gmail.com
 #include <QNetworkRequest>
 
 #include <QDebug>
-#include "networkmanager.h"
+
 
 class MainController:  public QWidget{
     Q_OBJECT
@@ -32,13 +33,17 @@ public:
     MainController(QWidget *parent = nullptr);
 
 signals:
+    void gBankFileData_T(QString gBankData_T);
 
 
 public slots:
-
+    void loadGenBankData(void);
 
 private:
-    NetworkManager *genBankNetworkMgr;
+    QString fileName;
+    QString filePath;
+    QString gBankFileData = "";
+
 
 };
 
