@@ -38,6 +38,7 @@ signals:
     void currentProgressFiles(int);
     void dataSize(int xx);
     void state(QString);
+    void gBankdataToQml(QString gBankData_N);
 
 private:
     QNetworkAccessManager *manager;
