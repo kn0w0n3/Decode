@@ -59,6 +59,25 @@ void NetworkManager::searchGenBankData(int dbC, QString uST){
     userSearchTerm = uST;
     qDebug() << "User search term is: " << uST;
 
+    /*
+    This will probably need to be different for each database or depending on what you are doing
+    Basic Searching: This is a search query. User selects database and enters search terms
+    esearch.fcgi?db=<database>&term=<query>
+    */
+    //QUrl url(entrezBaseUrl + "esearch.fcgi?db=" + databaseChoice +  "&term=" + userSearchTerm);
+
+
+    /*
+    Downloading Full Records
+    Basic Downloading
+    efetch.fcgi?db=<database>&id=<uid_list>&rettype=<retrieval_type>
+    &retmode=<retrieval_mode>
+    Input: List of UIDs (&id); Entrez database (&db); Retrieval type (&rettype); Retrieval mode (&retmode)
+    Output: Formatted data records as specified
+    Example: Download nuccore GIs 34577062 and 24475906 in FASTA format
+    https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=34577062,24475906&rettype=fasta&retmode=text
+    */
+
     QUrl url(entrezBaseUrl + "esearch.fcgi?db=" + databaseChoice +  "&term=" + userSearchTerm);
     request.setUrl(url);
     networkResponse = manager->get(request);
