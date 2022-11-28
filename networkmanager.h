@@ -30,7 +30,7 @@ public slots:
     void slotReadyRead();
     void updateDownloadProgress(qint64, qint64);
     void processIncomingData();
-    void downloadGenBankData();
+    void searchGenBankData(int, QString);
 
 signals:
     void resultReady(const QString);
@@ -47,5 +47,14 @@ private:
     QTimer *fileDownloader;
     qint64 incomingDataSize;
     QByteArray responseData;
+
+    //Variables for the Entrez API database queries
+    QString entrezBaseUrl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
+    QString databaseChoice = "";
+    QString userSearchTerm = "";
+    QString dbNames[35] = {"Select Database","Gene","GEO DataSets","GEO Profiles","HomoloGene","PopSet","Assembly","BioCollections",
+                           "BioProject","BioSample","Genome", "Nucleotide","SRA","Taxonomy","Conseved Domains","Identical Protein Groups",
+                           "Protein","Protein Family Models","Structure","ClinicalTrials.gov","ClinVar", "dbGaP","dbSNP","dbVaR","GTR","MedGen",
+                           "OMIM","blastsn","blastx","tblastn","Primer-Blast","BioAssays","Compounds","Pathways","Substances"};
 };
 #endif // NETWORKMANAGER_H

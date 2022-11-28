@@ -28,16 +28,13 @@ Window {
         onGBankFileData_T: {
             textAreaGenBankData.text += gBankData_T
             //textAreaTemp.text += gBankData_T
-
         }
-
     }
     //Network manger Connections
     Connections {
         target: networkManager
         onGBankdataToQml: {
             textAreaTemp.text += gBankData_N
-
         }
     }
 
@@ -274,7 +271,7 @@ Window {
         }
 
         Button {
-            x: 234
+            x: 227
             y: 569
             width: 100
             height: 40
@@ -302,8 +299,15 @@ Window {
                 //mainWin.visible = false
                 //videoX.stop()
                 //videoY.play()
-                networkManager.downloadGenBankData()
+                var databaseChoice = control2.currentIndex
+                var userSearchterm = userSearchText.text
 
+                if(databaseChoice > 0){
+                    networkManager.searchGenBankData(databaseChoice , userSearchterm)
+                }
+                else{
+                    //Tell user to select a database
+                }
             }
         }
 
@@ -373,13 +377,13 @@ Window {
             id: control2
             x: 227
             y: 64
-            width: 200
+            width: 280
             height: 29
 
-            model: ["Select Database", "Gene", "GEO DataSets", "GEO Profiles", "HomoloGene", "PopSet", "Assembly", "BioCollections",
-                    "BioProject", "BioSample", "Genome", "Nucleotide", "SRA", "Taxonomy", "Conseved Domains", "Identical Protein Groups",
-                    "Protein", "Protein Family Models", "Structure", "ClinicalTrials.gov", "ClinVar", "dbGaP","dbSNP","dbVaR", "GTR", "MedGen",
-                    "OMIM", "blastsn", "blastsp", "blastx", "tblastn", "Primer-Blast", "BioAssays", "Compunds", "Pathways", "Substances"]
+            model: ["Select Database", "GENES - Gene", "GENES - GEO DataSets", "GENES - GEO Profiles", "GENES - HomoloGene", "GENES - PopSet", "GENOMES - Assembly", "GENOMES - BioCollections",
+                    "GENOMES - BioProject", "GENOMES - BioSample", "GENOMES - Genome", "GENOMES - Nucleotide", "GENOMES - SRA", "GENOMES - Taxonomy", "PROTEINS - Conseved Domains", "PROTEINS - Identical Protein Groups",
+                    "PROTEINS - Protein", "PROTEINS - Protein Family Models", "PROTEINS - Structure", "CLINICAL - ClinicalTrials.gov", "CLINICAL - ClinVar", "CLINICAL - dbGaP","CLINICAL - dbSNP","CLINICAL - dbVaR", "CLINICAL - GTR", "CLINICAL - MedGen",
+                    "CLINICAL - OMIM", "BLAST- blastsn", "BLAST- blastsp", "BLAST - blastx", "BLAST - tblastn", "BLAST - Primer-Blast", "PUBCHEM - BioAssays", "PUBCHEM - Compunds", "PUBCHEM - Pathways", "PUBCHEM - Substances"]
 
             delegate: ItemDelegate {
                 width: control2.width
@@ -477,7 +481,7 @@ Window {
             border.color: "#ffffff"
 
             TextEdit {
-                id: textEdit
+                id: userSearchText
                 x: 4
                 y: 6
                 width: 701

@@ -23,7 +23,6 @@ void MainController::loadGenBankData(){
         //qDebug() << "In file read funtion";
         QTextStream genBankFileData(&fileLocation);
         while (!genBankFileData.atEnd()){
-
             gBankFileData = genBankFileData.readAll();
         }
         fileLocation.close();

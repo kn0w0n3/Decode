@@ -4,7 +4,7 @@ Author:  Joanthan Baird
 Date:    23NOV2022
 Purpose: Genetics Analysis Tools
 Contact: tr14rc3@gmail.com
- */
+*/
 
 NetworkManager::NetworkManager(){
     qDebug() << "Update controller initializing";
@@ -32,7 +32,7 @@ void NetworkManager::updateDownloadProgress(qint64 bytesRead, qint64 bytesTotal)
     qDebug() << "bytes total qint64 to string " + QString::number(bT);
 }
 
-//Process the data and write to file
+//Process the data and write to file - This may be optional
 void NetworkManager::processIncomingData(){
     qDebug() << "The data size... " + QString::number(incomingDataSize);
     QFile file("/home/voldem0rt/Documents/Qt_Projects/Decode/GenBank-Data/data-23NOV2022.txt");
@@ -49,20 +49,17 @@ void NetworkManager::processIncomingData(){
     }
 }
 
-//APIs
-//https://www.ncbi.nlm.nih.gov/
-//A mirror of the GenBank FTP site at the NCBI is available at the University of Indiana, courtesy of the Bio-Mirror project:
-//ftp://bio-mirror.net/biomirror/genbank/
 //Set the URL for the file download. Connect signals and slots to get the data and metadata.
-void NetworkManager::downloadGenBankData(){
+void NetworkManager::searchGenBankData(int dbC, QString uST){
     qDebug() << "Requesting data over network!";
 
-    //"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch -db pubmed -query "selective serotonin reuptake inhibitor""
-    //QUrl url("ftp://ftp.ncbi.nlm.nih.gov/genomes/all/README_change_notice.txt");
-    QUrl url("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=protein&id=6678417,9507199,28558982,28558984,28558988,28558990");
-    //url.setUserName("anonymous");
-    //url.setPassword("anonymous");
-    //url.setPort(21);
+    databaseChoice = dbNames[dbC];
+    qDebug() << "database choice is: " << databaseChoice;
+
+    userSearchTerm = uST;
+    qDebug() << "User search term is: " << uST;
+
+    QUrl url(entrezBaseUrl + "esearch.fcgi?db=" + databaseChoice +  "&term=" + userSearchTerm);
     request.setUrl(url);
     networkResponse = manager->get(request);
     connect(networkResponse, &QNetworkReply::finished, this, &NetworkManager::processIncomingData);
