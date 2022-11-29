@@ -1,7 +1,7 @@
 # Decode | Genetics Analysis
 Genetics Analysis 
 
-![decode-gui-progress-11-27-22](https://user-images.githubusercontent.com/22214754/204402547-38394c1f-7ece-4941-86ea-95d7c7b1e5e1.gif)  
+![decode-gui-11-29-22](https://user-images.githubusercontent.com/22214754/204507196-cf2c89e3-bbc5-4a67-8d3d-28bb96cdb191.gif)    
 
 The goal of this project is to organize and utilize the genetic information provided by The National Center for Biotechnology Information. To develop new tools, ideas, and implement artificial intelligence to analyze data.  
 
