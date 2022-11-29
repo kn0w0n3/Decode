@@ -24,3 +24,4 @@ Qt kit 5.12.2
 # **APIs:**  
 ![ncbi-logo](https://user-images.githubusercontent.com/22214754/204448800-2b846e5b-2c68-4c4e-8687-43aac8ac752e.png)      
 https://www.ncbi.nlm.nih.gov/    
+https://www.ncbi.nlm.nih.gov/home/develop/  
