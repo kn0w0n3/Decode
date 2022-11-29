@@ -210,7 +210,7 @@ Window {
         color: "#000000"
 
         Image {
-            id: image2
+            id: decodeLogoMainWin
             x: 822
             y: 13
             width: 277
@@ -2050,111 +2050,12 @@ Window {
 
         Image {
             id: image
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
-        }
-
-        ComboBox {
-            id: control2
-            x: 337
-            y: 101
-            width: 280
-            height: 29
-            visible: false
-
-            model: ["Select Database", "GENES - Gene", "GENES - GEO DataSets", "GENES - GEO Profiles", "GENES - HomoloGene", "GENES - PopSet", "GENOMES - Assembly", "GENOMES - BioCollections",
-                "GENOMES - BioProject", "GENOMES - BioSample", "GENOMES - Genome", "GENOMES - Nucleotide", "GENOMES - SRA", "GENOMES - Taxonomy", "PROTEINS - Conseved Domains", "PROTEINS - Identical Protein Groups",
-                "PROTEINS - Protein", "PROTEINS - Protein Family Models", "PROTEINS - Structure", "CLINICAL - ClinicalTrials.gov", "CLINICAL - ClinVar", "CLINICAL - dbGaP","CLINICAL - dbSNP","CLINICAL - dbVaR", "CLINICAL - GTR", "CLINICAL - MedGen",
-                "CLINICAL - OMIM", "BLAST- blastsn", "BLAST- blastsp", "BLAST - blastx", "BLAST - tblastn", "BLAST - Primer-Blast", "PUBCHEM - BioAssays", "PUBCHEM - Compunds", "PUBCHEM - Pathways", "PUBCHEM - Substances"]
-
-            delegate: ItemDelegate {
-                width: control2.width
-                contentItem: Text {
-                    text: control2.textRole
-                          ? (Array.isArray(control2.model) ? modelData[control2.textRole] : model[control2.textRole])
-                          : modelData
-                    color: "#ffffff" //Change the text colr of the model data in the drop down box.
-                    font: control2.font
-                    elide: Text.ElideRight
-                    verticalAlignment: Text.AlignVCenter
-                }
-                highlighted: control2.highlightedIndex === index
-            }
-
-            indicator: Canvas {
-                id: canvas2
-                x: control2.width - width - control2.rightPadding
-                y: control2.topPadding + (control2.availableHeight - height) / 2
-                width: 12
-                height: 8
-                contextType: "2d"
-
-                Connections {
-                    target: control2
-                    function onPressedChanged() { canvas2.requestPaint(); }
-                }
-
-                //This will change the color of the triangle indicator.
-                onPaint: {
-                    context.reset();
-                    context.moveTo(0, 0);
-                    context.lineTo(width, 0);
-                    context.lineTo(width / 2, height);
-                    context.closePath();
-                    context.fillStyle = control2.pressed ? "#ffffff" : "#ffffff";
-                    context.fill();
-                }
-            }
-            //The second color is the main color. The first item is what color the changes to once clicked.
-            //This will change the text color of main text in the box.
-            contentItem: Text {
-                leftPadding: 0
-                rightPadding: control2.indicator.width + control2.spacing
-
-                text: control2.displayText
-                font: control2.font
-                color: control2.pressed ? "#ffffff" : "#ffffff"
-                verticalAlignment: Text.AlignVCenter
-                elide: Text.ElideRight
-            }
-
-            //This will change the main box background color, border color,  and the border color when pressed.
-            //The second color is the main color. The first item is what color the changes to once clicked.
-            background: Rectangle {
-                implicitWidth: 120
-                implicitHeight: 40
-                color: "#000000"
-                border.color: control2.pressed ? "#ffffff" : "#ffffff"
-                border.width: control2.visualFocus ? 2 : 1
-                radius: 2
-            }
-
-            popup: Popup {
-                y: control2.height - 1
-                width: control2.width
-                implicitHeight: contentItem.implicitHeight
-                padding: 1
-
-                contentItem: ListView {
-                    clip: true
-                    implicitHeight: contentHeight
-                    model: control2.popup.visible ? control2.delegateModel : null
-                    currentIndex: control2.highlightedIndex
-
-                    ScrollIndicator.vertical: ScrollIndicator { }
-                }
-
-                //This will change the color of the drop down Rectangle
-                background: Rectangle {
-                    border.color: "#ffffff"
-                    color: "#000000"
-                    radius: 5
-                }
-            }
         }
 
         Rectangle {
@@ -2331,10 +2232,10 @@ Window {
 
         Image {
             id: decodeLogo
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -2513,10 +2414,10 @@ Window {
 
         Image {
             id: decodeLogo1
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -2695,10 +2596,10 @@ Window {
 
         Image {
             id: decodeLogo2
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -2877,10 +2778,10 @@ Window {
 
         Image {
             id: decodeLogo3
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -3013,20 +2914,6 @@ Window {
                     color: "#ffffff"
                     placeholderText: qsTr("")
                     font.pointSize: 11
-
-                    Text {
-                        id: text2
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                 }
             }
         }
@@ -3074,10 +2961,10 @@ Window {
 
         Image {
             id: decodeLogo4
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -3112,6 +2999,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text2
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -3193,19 +3094,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text3
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -3255,10 +3143,10 @@ Window {
 
         Image {
             id: decodeLogo5
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -3293,6 +3181,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text3
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -3374,19 +3276,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text4
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -3436,10 +3325,10 @@ Window {
 
         Image {
             id: decodeLogo6
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -3474,6 +3363,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text4
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -3555,19 +3458,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text5
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -3617,10 +3507,10 @@ Window {
 
         Image {
             id: decodeLogo7
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -3655,6 +3545,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text5
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -3736,19 +3640,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text6
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -3798,10 +3689,10 @@ Window {
 
         Image {
             id: decodeLogo8
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -3836,6 +3727,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text6
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -3917,19 +3822,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text7
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -3979,10 +3871,10 @@ Window {
 
         Image {
             id: decodeLogo9
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -4017,6 +3909,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text7
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -4098,19 +4004,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text8
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -4160,10 +4053,10 @@ Window {
 
         Image {
             id: decodeLogo10
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -4198,6 +4091,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text8
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -4279,19 +4186,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text9
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -4341,10 +4235,10 @@ Window {
 
         Image {
             id: decodeLogo11
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -4379,6 +4273,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text9
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -4460,19 +4368,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text10
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -4522,10 +4417,10 @@ Window {
 
         Image {
             id: decodeLogo12
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -4560,6 +4455,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text10
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -4641,19 +4550,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text11
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -4703,10 +4599,10 @@ Window {
 
         Image {
             id: decodeLogo13
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -4741,6 +4637,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text11
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -4822,19 +4732,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text12
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -4884,10 +4781,10 @@ Window {
 
         Image {
             id: decodeLogo14
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -4922,6 +4819,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text12
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -5003,19 +4914,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text13
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -5065,10 +4963,10 @@ Window {
 
         Image {
             id: decodeLogo15
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -5103,6 +5001,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text13
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -5184,19 +5096,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text14
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -5246,10 +5145,10 @@ Window {
 
         Image {
             id: decodeLogo16
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -5284,6 +5183,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text14
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -5365,19 +5278,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text15
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -5427,10 +5327,10 @@ Window {
 
         Image {
             id: decodeLogo17
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -5465,6 +5365,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text15
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -5546,19 +5460,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text26
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -5608,10 +5509,10 @@ Window {
 
         Image {
             id: decodeLogo18
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -5646,6 +5547,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text26
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -5727,19 +5642,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text27
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -5789,10 +5691,10 @@ Window {
 
         Image {
             id: decodeLogo19
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -5827,6 +5729,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text27
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -5908,19 +5824,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text38
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -5970,10 +5873,10 @@ Window {
 
         Image {
             id: decodeLogo20
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -6008,6 +5911,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text38
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -6089,19 +6006,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text95
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -6151,10 +6055,10 @@ Window {
 
         Image {
             id: decodeLogo21
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -6189,6 +6093,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text95
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -6270,19 +6188,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text96
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -6332,10 +6237,10 @@ Window {
 
         Image {
             id: decodeLogo22
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -6370,6 +6275,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text96
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -6451,19 +6370,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text97
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -6513,10 +6419,10 @@ Window {
 
         Image {
             id: decodeLogo23
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -6551,6 +6457,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text97
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -6632,19 +6552,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text98
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -6694,10 +6601,10 @@ Window {
 
         Image {
             id: decodeLogo24
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -6732,6 +6639,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text98
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -6813,19 +6734,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text99
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -6875,10 +6783,10 @@ Window {
 
         Image {
             id: decodeLogo25
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -6913,6 +6821,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text99
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -6994,19 +6916,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text100
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -7056,10 +6965,10 @@ Window {
 
         Image {
             id: decodeLogo26
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -7094,6 +7003,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text100
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -7175,19 +7098,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text101
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -7237,10 +7147,10 @@ Window {
 
         Image {
             id: decodeLogo27
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -7275,6 +7185,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text101
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -7356,19 +7280,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text102
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -7418,10 +7329,10 @@ Window {
 
         Image {
             id: decodeLogo28
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -7456,6 +7367,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text102
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -7537,19 +7462,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text103
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -7599,10 +7511,10 @@ Window {
 
         Image {
             id: decodeLogo29
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -7637,6 +7549,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text103
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -7718,19 +7644,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text104
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -7780,10 +7693,10 @@ Window {
 
         Image {
             id: decodeLogo30
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -7818,6 +7731,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text104
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -7899,19 +7826,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text105
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -7961,10 +7875,10 @@ Window {
 
         Image {
             id: decodeLogo31
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -7999,6 +7913,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text105
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -8080,19 +8008,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text106
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -8142,10 +8057,10 @@ Window {
 
         Image {
             id: decodeLogo32
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -8180,6 +8095,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text106
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -8261,19 +8190,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text107
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#1dff39"
-                        text: qsTr("Proteins Data:")
-                        font.pixelSize: 23
-                        font.bold: true
-                        font.underline: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -8323,10 +8239,10 @@ Window {
 
         Image {
             id: decodeLogo33
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -8361,6 +8277,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text107
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Proteins Data:")
+            font.pixelSize: 23
+            font.bold: true
+            font.underline: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -8442,19 +8372,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text108
-                        x: -14
-                        y: -45
-                        width: 177
-                        height: 34
-                        color: "#262af7"
-                        text: qsTr("Literature Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -8504,10 +8421,10 @@ Window {
 
         Image {
             id: decodeLogo34
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -8542,6 +8459,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text108
+            x: 337
+            y: 106
+            width: 177
+            height: 34
+            color: "#262af7"
+            text: qsTr("Literature Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -8623,19 +8554,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text109
-                        x: -14
-                        y: -45
-                        width: 178
-                        height: 34
-                        color: "#262af7"
-                        text: qsTr("Literature Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -8685,10 +8603,10 @@ Window {
 
         Image {
             id: decodeLogo35
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -8723,6 +8641,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text109
+            x: 337
+            y: 106
+            width: 178
+            height: 34
+            color: "#262af7"
+            text: qsTr("Literature Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -8804,19 +8736,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text110
-                        x: -14
-                        y: -45
-                        width: 160
-                        height: 34
-                        color: "#262af7"
-                        text: qsTr("Literature Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -8866,10 +8785,10 @@ Window {
 
         Image {
             id: decodeLogo36
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -8904,6 +8823,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text110
+            x: 337
+            y: 106
+            width: 160
+            height: 34
+            color: "#262af7"
+            text: qsTr("Literature Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -8985,19 +8918,6 @@ Window {
                     width: 731
                     height: 324
                     color: "#ffffff"
-                    Text {
-                        id: text111
-                        x: -14
-                        y: -45
-                        width: 183
-                        height: 34
-                        color: "#262af7"
-                        text: qsTr("Literature Data:")
-                        font.pixelSize: 23
-                        font.underline: true
-                        font.bold: true
-                        styleColor: "#ffffff"
-                    }
                     placeholderText: qsTr("")
                     font.pointSize: 11
                 }
@@ -9047,10 +8967,10 @@ Window {
 
         Image {
             id: decodeLogo37
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -9085,6 +9005,20 @@ Window {
             text: qsTr("Conserved Domains Database | Conserved protein domains")
             font.pixelSize: 23
             font.bold: false
+        }
+
+        Text {
+            id: text111
+            x: 337
+            y: 106
+            width: 183
+            height: 34
+            color: "#262af7"
+            text: qsTr("Literature Data:")
+            font.pixelSize: 23
+            font.underline: true
+            font.bold: true
+            styleColor: "#ffffff"
         }
     }
 
@@ -9215,10 +9149,10 @@ Window {
 
         Image {
             id: decodeLogo38
-            x: 843
-            y: 8
-            width: 234
-            height: 66
+            x: 822
+            y: 13
+            width: 277
+            height: 67
             source: "images/Text-Logo.png"
             fillMode: Image.PreserveAspectFit
         }
