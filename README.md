@@ -5,6 +5,11 @@ Genetics Analysis
 
 The goal of this project is to organize and utilize the genetic information provided by The National Center for Biotechnology Information. To develop new tools, ideas, and implement artificial intelligence to analyze data.  
 
+# Support the project:  
+If you would like to support the project, please consider making a donation!  
+Bitcoin: 3HWf1TTb7MCPEtXEwC4fwN7tH4UEHfaqXB    
+Ethereum: 0x1521AFc76Ad1d124c3DfB9cdc790F2c8f99652e7  
+
 # Developed with:  
 
 ![github-linux-logo-kernel-corn](https://user-images.githubusercontent.com/22214754/196063512-495e0624-c344-4b32-9507-0f4fbc85a633.png)      
