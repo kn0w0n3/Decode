@@ -19,4 +19,8 @@ From revision 2d5512f2c4
 https://www.qt.io/   
 
 Framework:    
-Qt kit 5.12.2    
+Qt kit 5.12.2  
+
+![ncbi-logo](https://user-images.githubusercontent.com/22214754/204448530-44d9c001-f9b5-4844-8ae4-0cd0d7b12289.png)  
+
+https://www.ncbi.nlm.nih.gov/  
