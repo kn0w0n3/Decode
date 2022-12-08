@@ -11,6 +11,8 @@
 #include <QTimer>
 #include <QTextStream>
 #include <QDataStream>
+#include <QDesktopServices>
+#include <QProcess>
 
 /*
 Author:  Joanthan Baird
@@ -50,8 +52,12 @@ private:
 
     //Variables for the Entrez API database queries
     QString entrezBaseUrl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
-    QString databaseChoice = "";
+    QString eSearchBaseUrl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi";
+    QString eFetchBaseUrl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi";
+    QString selectedDatabase = "Gene";
     QString userSearchTerm = "";
+    QString eFetchIDsToSearch = "";
+    int p_SearchType = 0;
     QString dbNames[35] = {"Select Database","Gene","GEO DataSets","GEO Profiles","HomoloGene","PopSet","Assembly","BioCollections",
                            "BioProject","BioSample","Genome", "Nucleotide","SRA","Taxonomy","Conseved Domains","Identical Protein Groups",
                            "Protein","Protein Family Models","Structure","ClinicalTrials.gov","ClinVar", "dbGaP","dbSNP","dbVaR","GTR","MedGen",

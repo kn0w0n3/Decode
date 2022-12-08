@@ -21,9 +21,19 @@ Window {
     color: "#ffffff"
     title: qsTr("Decode")
 
-    //Connections for passing data between C++ classes and QML GUI components
-    //Main controller connections
-
+/*
+    Timer {
+            id: videoPosTimer
+            interval: 1000
+            repeat: true
+            running: true
+            onTriggered:{
+                //var x = videoX1.position
+                //gene_Win_Txt_Area.text = x
+                gene_Win_Txt_Area.text = geneWinVideo.position
+            }
+        }
+        */
     Rectangle {
         id: dataViewerWin
         x: 0
@@ -33,7 +43,7 @@ Window {
         opacity: 1
         visible: false
         color: "#000000"
-
+/*
         Video {
             id: videoY
             x: 0
@@ -48,7 +58,7 @@ Window {
             loops: MediaPlayer.Infinite
             focus: true
         }
-
+*/
         Rectangle {
             id: borderRectGenBData
             x: 227
@@ -209,6 +219,27 @@ Window {
         visible: true
         color: "#000000"
 
+        Video {
+            id: mainWinVideo
+            x: 0
+            y: 0
+            width: 1920
+            height: 1080
+            visible: true
+            source: "/video/bg.mp4"
+            fillMode: VideoOutput.PreserveAspectCrop
+            clip: false
+            anchors.fill: parent
+            autoPlay: true
+            loops: MediaPlayer.Infinite
+            focus: true
+            onPositionChanged: {
+                if(mainWinVideo.position >= 1800){
+                    mainWinVideo.seek(0)
+                }
+            }
+        }
+
         Image {
             id: decodeLogoMainWin
             x: 822
@@ -277,6 +308,9 @@ Window {
                     onClicked: {
                         mainWinDataSelect.visible = false
                         genes_Gene_Win.visible = true
+                        mainWinVideo.stop()
+                        geneWinVideo.play()
+
                     }
                 }
             }
@@ -1624,7 +1658,7 @@ Window {
         }
 
         Rectangle {
-            id: rectangle7
+            id: puChemRect
             x: 1379
             y: 107
             width: 400
@@ -1874,19 +1908,25 @@ Window {
         color: "#000000"
 
         Video {
-            id: videoX
+            id: geneWinVideo
             x: 0
             y: 0
             width: 1920
             height: 1080
             visible: true
-            source: "/video/particle_bg.mp4"
+            source: "/video/bg.mp4"
             fillMode: VideoOutput.PreserveAspectCrop
             clip: false
             anchors.fill: parent
             loops: MediaPlayer.Infinite
             focus: true
             autoPlay: false
+            onPositionChanged: {
+                if(geneWinVideo.position >= 18000){
+                    geneWinVideo.seek(0)
+                }
+            }
+
         }
 
         ComboBox {
@@ -1896,10 +1936,14 @@ Window {
             width: 332
             height: 29
             visible: true
-
+            /*Original Model
             model: ["Find Genes By...", "Free text search", "Partial name and multiple species", "Associated sequence accession number", "Gene name (symbol)",
-                "Publication (PubMed ID)", "Gene Ontology (GO) terms or identifiers", "Genes with variants of medical interest", "Chromosome and species",
-                "Enzyme Commission (EC) numbers"]
+                    "Publication (PubMed ID)", "Gene Ontology (GO) terms or identifiers", "Genes with variants of medical interest", "Chromosome and species",
+                    "Enzyme Commission (EC) numbers", "Custom Search"]
+            */
+
+
+            model: ["Select Search Type", "ESearch", "EFetch", "List Valid Databases"]
 
             delegate: ItemDelegate {
                 width: control2.width
@@ -1987,8 +2031,6 @@ Window {
             }
         }
 
-
-
         Button {
             id: geneWin_BackBtn
             x: 8
@@ -2016,6 +2058,8 @@ Window {
             onClicked: {
                 mainWinDataSelect.visible = true
                 genes_Gene_Win.visible = false
+                geneWinVideo.stop()
+                mainWinVideo.play()
 
                 //videoX.play()
                 //videoY.stop()
@@ -2145,15 +2189,28 @@ Window {
                 //mainWin.visible = false
                 //videoX.stop()
                 //videoY.play()
-                var databaseChoice = 1
+
+                //Gene Database | Variables for combobox selection.
+                var searchType = control2.currentIndex
                 var userSearchterm = gene_UserSerchTxt.text
 
-                //if(databaseChoice > 0){
-                    networkManager.searchGenBankData(databaseChoice, userSearchterm)
-                //}
-                //else{
-                    //Tell user to select a database
-                //}
+                //Query the database with user selection from the drop down menu
+                if(searchType == 0){
+                    //Tell user to select an option
+                    gene_Win_Txt_Area.text = "please select a search option from the drop down menu "
+                }
+                //This is the free text search option
+                else if(searchType == 1){
+                    networkManager.searchGenBankData(searchType, userSearchterm)
+                }
+                //This is the Partial name and multiple species option
+                else if(searchType == 2){
+                    networkManager.searchGenBankData(searchType, userSearchterm)
+                }
+                //List valid entrez databases
+                else if(searchType == 3){
+                    networkManager.searchGenBankData(searchType, userSearchterm)
+                }
             }
         }
 
@@ -2181,7 +2238,6 @@ Window {
             }
             palette.buttonText: "#ffffff"
             layer.enabled: true
-
         }
 
         Button {
@@ -2191,7 +2247,7 @@ Window {
             width: 100
             height: 40
             visible: true
-            text: qsTr("Help")
+            text: qsTr("Clear")
 
             background: Rectangle {
                 color: "#161e20"
@@ -2209,6 +2265,10 @@ Window {
             }
             palette.buttonText: "#ffffff"
             layer.enabled: true
+
+            onClicked: {
+                gene_Win_Txt_Area.text = ""
+            }
         }
     }
     Rectangle {
@@ -2228,12 +2288,17 @@ Window {
             height: 1080
             visible: true
             anchors.fill: parent
-            source: "/video/particle_bg.mp4"
+            source: "/video/bg.mp4"
             fillMode: VideoOutput.PreserveAspectCrop
             autoPlay: false
             clip: false
             focus: true
-            loops: MediaPlayer.Infinite
+            //loops: MediaPlayer.Infinite
+            onStopped: {
+
+                videoX1.pos = 1
+                videoX1.play()
+            }
         }
 
         Button {
@@ -2415,7 +2480,12 @@ Window {
             autoPlay: false
             clip: false
             focus: true
-            loops: MediaPlayer.Infinite
+            //loops: MediaPlayer.Infinite
+            onStopped: {
+                //videoX2.seek(4)
+
+                videoX2.position = 2
+            }
         }
 
         Button {

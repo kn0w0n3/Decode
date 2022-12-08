@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>video/particle_bg.mp4</file>
+        <file>video/bg.mp4</file>
     </qresource>
 </RCC>

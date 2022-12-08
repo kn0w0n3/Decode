@@ -50,38 +50,59 @@ void NetworkManager::processIncomingData(){
 }
 
 //Set the URL for the file download. Connect signals and slots to get the data and metadata.
-void NetworkManager::searchGenBankData(int dbC, QString uST){
+void NetworkManager::searchGenBankData(int searchType, QString uST){
     qDebug() << "Requesting data over network!";
+    qDebug() << "The search type is: " << searchType;
+    p_SearchType = searchType;
+    //TODO open the documentation pdf
+    //TODO Parse XML
+    //p_SearchType = 3;
+    //qDebug() << "Now the search type is: " << QString::number(p_SearchType);
+    //12-5-22: There are 9 E-utilities
+    //We are currently interested in ESearch, EFetch, and EInfo
 
-    databaseChoice = dbNames[dbC];
-    qDebug() << "database choice is: " << databaseChoice;
+    //ESearch  
+    //Base URL: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi
+    //Provides a list of UIDs matching a text query
 
-    userSearchTerm = uST;
-    qDebug() << "User search term is: " << uST;
+    //EFetch
+    //Base URL: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi
 
-    /*
-    This will probably need to be different for each database or depending on what you are doing
-    Basic Searching: This is a search query. User selects database and enters search terms
-    esearch.fcgi?db=<database>&term=<query>
-    */
-    //QUrl url(entrezBaseUrl + "esearch.fcgi?db=" + databaseChoice +  "&term=" + userSearchTerm);
+    //ESearch for data
+    if(p_SearchType == 1){
+        userSearchTerm = uST;
+        qDebug() << "User search term is: " << uST;
+        QUrl selectedSearch(eSearchBaseUrl + "?db=" + selectedDatabase + "&term=" + userSearchTerm);
+        request.setUrl(selectedSearch);
+        networkResponse = manager->get(request);
+        connect(networkResponse, &QNetworkReply::finished, this, &NetworkManager::processIncomingData);
+        connect(networkResponse, &QIODevice::readyRead, this, &NetworkManager::slotReadyRead);
+        connect(networkResponse, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+    }
+    //EFetch to get more details about data obtained from the ESearch query
+    else if(p_SearchType == 2){
+        qDebug() << "In Efetch";
+        //efetch.fcgi?db=pubmed&id=19393038,30242208,29453458
+        //efetch.fcgi?db=protein&id=15718680,NP_001098858.1,119703751
+        //efetch.fcgi?db=protein&query_key=<key>&WebEnv=<webenv string>
+        eFetchIDsToSearch = uST;
+        //QUrl selectedSearch(eFetchBaseUrl + "?db=" + selectedDatabase + "&id=" + eFetchIDsToSearch + "&retmode=default");
 
-
-    /*
-    Downloading Full Records
-    Basic Downloading
-    efetch.fcgi?db=<database>&id=<uid_list>&rettype=<retrieval_type>
-    &retmode=<retrieval_mode>
-    Input: List of UIDs (&id); Entrez database (&db); Retrieval type (&rettype); Retrieval mode (&retmode)
-    Output: Formatted data records as specified
-    Example: Download nuccore GIs 34577062 and 24475906 in FASTA format
-    https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=34577062,24475906&rettype=fasta&retmode=text
-    */
-
-    QUrl url(entrezBaseUrl + "esearch.fcgi?db=" + databaseChoice +  "&term=" + userSearchTerm);
-    request.setUrl(url);
-    networkResponse = manager->get(request);
-    connect(networkResponse, &QNetworkReply::finished, this, &NetworkManager::processIncomingData);
-    connect(networkResponse, &QIODevice::readyRead, this, &NetworkManager::slotReadyRead);
-    connect(networkResponse, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+        //A test query
+        QUrl selectedSearch(eFetchBaseUrl + "?db=gene&id=7157,7124,7422,3569,7040,4524,3091,2099,3586,351,1636,6774,3845,627,4318,1401,7421,5243,4790,3123&rettype=docsum&retmode=default");
+        request.setUrl(selectedSearch);
+        networkResponse = manager->get(request);
+        connect(networkResponse, &QNetworkReply::finished, this, &NetworkManager::processIncomingData);
+        connect(networkResponse, &QIODevice::readyRead, this, &NetworkManager::slotReadyRead);
+        connect(networkResponse, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+    }
+    //EInfo: Return a list of valid databases
+    else if(p_SearchType == 3){
+        QUrl selectedSearch("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/einfo.fcgi");
+        request.setUrl(selectedSearch);
+        networkResponse = manager->get(request);
+        connect(networkResponse, &QNetworkReply::finished, this, &NetworkManager::processIncomingData);
+        connect(networkResponse, &QIODevice::readyRead, this, &NetworkManager::slotReadyRead);
+        connect(networkResponse, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+    }
 }
